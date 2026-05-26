@@ -31,7 +31,7 @@ body{
   background-size:40px 40px;background-position:0 0,20px 20px;opacity:.18;}
 .floatie{position:fixed;pointer-events:none;z-index:1;animation:floatUp linear infinite;opacity:0}
 @keyframes floatUp{0%{transform:translateY(105vh) rotate(0deg);opacity:0}8%{opacity:.55}88%{opacity:.25}100%{transform:translateY(-8vh) rotate(20deg);opacity:0}}
-.page{display:none;position:relative;z-index:2;min-height:100vh;padding:2rem 1.4rem}
+.page{display:none;position:relative;z-index:2;min-height:100vh;padding:2rem 1.4rem;width:100%}
 .page.active{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.3rem;animation:fadeUp .45s ease forwards}
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 .progress{display:flex;gap:.5rem;align-items:center}
@@ -85,23 +85,24 @@ h2.sec span{color:var(--pink-deep)}
 #btnNo.flying{position:fixed;z-index:999;pointer-events:auto;margin:0;}
 
 /* ACTIVITY CARDS */
-.activity-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.85rem;width:100%;max-width:480px}
+.activity-grid{display:flex;flex-direction:row;justify-content:center;align-items:stretch;gap:.85rem;width:100%;padding:0 1rem;box-sizing:border-box;}
 .activity-card{
   background:var(--white);border:2.5px solid #f0e4e8;border-radius:20px;padding:.9rem .5rem .8rem;
   cursor:pointer;transition:all .2s;text-align:center;
   display:flex;flex-direction:column;align-items:center;gap:.45rem;
-  box-shadow:0 4px 14px rgba(244,167,185,.12);aspect-ratio:1/1;justify-content:center;}
+  box-shadow:0 4px 14px rgba(244,167,185,.12);aspect-ratio:1/1;justify-content:center;
+  flex:1;min-width:0;max-width:140px;}
 .activity-card:hover{border-color:var(--mint);transform:translateY(-4px);box-shadow:0 8px 22px var(--shadow-mint)}
 .activity-card.selected{border-color:var(--pink-deep);background:linear-gradient(135deg,#fff0f4,#fff8fb);box-shadow:0 8px 22px var(--shadow-pink);transform:translateY(-4px);}
 .activity-img-ph{width:72px;height:72px;border-radius:16px;background:linear-gradient(135deg,var(--peach),var(--lavender));display:flex;align-items:center;justify-content:center;font-size:1.9rem;flex-shrink:0;}
 .activity-img{width:72px;height:72px;border-radius:16px;object-fit:cover;border:2px solid #f0e4e8;flex-shrink:0;}
-.activity-name{font-weight:700;font-size:.82rem;color:var(--text)}
-.activity-desc{font-size:.72rem;color:var(--muted);font-weight:600;line-height:1.3}
+.activity-name{font-weight:700;font-size:.82rem;color:var(--text);text-align:center;width:100%}
+.activity-desc{font-size:.72rem;color:var(--muted);font-weight:600;line-height:1.3;text-align:center;width:100%}
 .activity-check{font-size:.95rem;opacity:0;transition:opacity .2s}
 .activity-card.selected .activity-check{opacity:1}
 
 /* PLACES */
-.places-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.85rem;width:100%;max-width:480px}
+.places-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.85rem;width:100%;max-width:480px;margin-left:auto;margin-right:auto}
 @media(max-width:440px){.places-grid{grid-template-columns:repeat(2,1fr)}}
 .place-card{
   background:var(--white);border:2.5px solid #f0e4e8;border-radius:20px;padding:.9rem .5rem .8rem;
@@ -129,7 +130,29 @@ input[type=date],input[type=time]{
 input:focus{border-color:var(--mint-deep);box-shadow:0 0 0 3px rgba(79,168,138,.15)}
 
 /* OUTFIT */
-.outfit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;width:100%;max-width:480px}
+.outfit-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem;width:100%;max-width:340px;margin-left:auto;margin-right:auto}
+
+/* RECOMMENDATION MODAL */
+.rec-overlay{position:fixed;inset:0;z-index:50;background:rgba(61,44,53,.45);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:1.5rem}
+.rec-overlay.show{display:flex;animation:fadeUp .25s ease}
+.rec-modal{background:var(--white);border-radius:28px;padding:1.8rem 1.6rem;width:100%;max-width:360px;box-shadow:0 16px 60px var(--shadow-pink);display:flex;flex-direction:column;gap:1rem;position:relative}
+.rec-modal::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--pink),var(--lavender),var(--mint));border-radius:28px 28px 0 0}
+.rec-modal h3{font-family:'Baloo 2',sans-serif;font-size:1.2rem;font-weight:800;color:var(--text);text-align:center}
+.rec-modal p{font-size:.85rem;color:var(--muted);font-weight:600;text-align:center;margin-top:-.3rem}
+.rec-modal textarea{width:100%;padding:.85rem 1rem;border:2px solid #e0f0ea;border-radius:14px;font-family:'Quicksand',sans-serif;font-size:.95rem;font-weight:600;color:var(--text);background:var(--cream);outline:none;resize:none;line-height:1.5;transition:border-color .2s,box-shadow .2s}
+.rec-modal textarea:focus{border-color:var(--pink-deep);box-shadow:0 0 0 3px var(--shadow-pink)}
+.rec-modal-btns{display:flex;gap:.7rem}
+.btn-rec-send{flex:1;background:linear-gradient(135deg,var(--pink-deep),var(--pink2));color:var(--white);border:none;padding:.8rem 1rem;border-radius:50px;font-family:'Baloo 2',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;box-shadow:0 4px 14px var(--shadow-pink);transition:transform .15s}
+.btn-rec-send:hover{transform:translateY(-2px)}
+.btn-rec-cancel{flex:1;background:var(--cream);color:var(--muted);border:2px solid #e0ccd2;padding:.8rem 1rem;border-radius:50px;font-family:'Baloo 2',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;transition:transform .15s}
+.btn-rec-cancel:hover{transform:translateY(-2px)}
+.btn-rec-trigger{background:var(--cream);color:var(--pink-deep);border:2px dashed var(--pink);padding:.6rem 1.4rem;border-radius:50px;font-family:'Baloo 2',sans-serif;font-size:.9rem;font-weight:700;cursor:pointer;transition:all .2s;display:block;margin:0 auto}
+.btn-rec-trigger:hover{background:#fff0f4;transform:translateY(-2px)}
+.rec-sent-msg{display:none;text-align:center;font-size:.88rem;font-weight:700;color:var(--mint-deep);padding:.5rem 0}
+.terserah-note{text-align:center;font-size:.82rem;color:var(--muted);font-weight:600;font-style:italic}
+.btn-terserah{background:linear-gradient(135deg,var(--lavender),#d4bfee);color:var(--pink-deep);border:2px solid #c9a8e8;padding:.75rem 1.8rem;border-radius:50px;font-family:'Baloo 2',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;box-shadow:0 4px 16px rgba(196,92,120,.15);transition:transform .15s,box-shadow .15s;display:block;margin:0 auto}
+.btn-terserah:hover{transform:translateY(-3px);box-shadow:0 8px 22px rgba(196,92,120,.22)}
+.btn-terserah.selected-terserah{background:linear-gradient(135deg,var(--pink-deep),var(--pink2));color:var(--white);border-color:var(--pink-deep)}
 .outfit-card{
   background:var(--white);border:2.5px solid #f0e4e8;border-radius:20px;padding:.75rem .5rem;
   cursor:pointer;transition:all .2s;text-align:center;
@@ -268,6 +291,7 @@ textarea::placeholder{color:#c9aab5}
       <div class="activity-check">💗</div>
     </div>
   </div>
+  <button class="btn-rec-trigger" onclick="openRecModal('activity')">✍️ Rekomendasiin kegiatan lain~</button>
   <button class="btn-next" id="btnNextActivity" onclick="goToPlaceOrTime()" disabled>Lanjut ✨</button>
 </div>
 
@@ -282,6 +306,7 @@ textarea::placeholder{color:#c9aab5}
   <div class="places-grid" id="placesGrid">
     <!-- Filled by JS -->
   </div>
+  <button class="btn-rec-trigger" onclick="openRecModal('place')">📍 Rekomendasiin tempat lain~</button>
   <button class="btn-next" id="btnNextPlace" onclick="goToPage4()" disabled>Lanjut ✨</button>
 </div>
 
@@ -331,13 +356,13 @@ textarea::placeholder{color:#c9aab5}
       <div class="outfit-cbadge">✓</div>
     </div>
     <div class="outfit-card" onclick="selectOutfit(this,'gapake-baju')">
-      <div class="outfit-img-ph" id="outfit-teknik">🙈</div>
+      <div class="outfit-img-ph" id="mosaic-gapake" style="font-size:2.4rem">😢</div>
       <div class="outfit-label">Gapake Baju</div>
       <div class="outfit-cbadge">✓</div>
     </div>
     <div class="outfit-card" onclick="selectOutfit(this,'terserah')">
-      <div class="outfit-img-ph" id="outfit-terserah">🤷</div>
-      <div class="outfit-label">Terserah Bang Aren</div>
+      <div class="outfit-img-ph" id="outfit-teknik">👷</div>
+      <div class="outfit-label">Baju Teknik</div>
       <div class="outfit-cbadge">✓</div>
     </div>
   </div>
@@ -348,6 +373,8 @@ textarea::placeholder{color:#c9aab5}
     <div class="feedback-text" id="feedbackText"></div>
   </div>
 
+  <p class="terserah-note">atau...</p>
+  <button class="btn-terserah" onclick="selectTerserahBangAren()">🤷 Terserah bang Aren aja~</button>
   <button class="btn-next" id="btnNextOutfit" onclick="goToPage6()" disabled>Lanjut ✨</button>
 </div>
 
@@ -384,6 +411,20 @@ textarea::placeholder{color:#c9aab5}
   <div class="deco">🌸 🌿 🌸</div>
 </div>
 
+<!-- RECOMMENDATION MODAL -->
+<div class="rec-overlay" id="recOverlay" onclick="closeRecModal(event)">
+  <div class="rec-modal" id="recModal">
+    <h3 id="recModalTitle">✍️ Rekomendasiin yuk~</h3>
+    <p id="recModalSub">Ada ide kegiatan lain? tulis aja di sini!</p>
+    <textarea id="recInput" rows="3" placeholder="tulis rekomendasi kamu... 💗" maxlength="200"></textarea>
+    <div class="rec-sent-msg" id="recSentMsg">✅wleeee gamau, pilih yg di atas aja~</div>
+    <div class="rec-modal-btns" id="recModalBtns">
+      <button class="btn-rec-cancel" onclick="closeRecModalDirect()">Batal</button>
+      <button class="btn-rec-send" onclick="submitRec()">Kirim 💗</button>
+    </div>
+  </div>
+</div>
+
 <script>
 emailjs.init('MGddCwBJ2dhlwtPAd');
 // FLOATING EMOJIS
@@ -398,7 +439,60 @@ function spawnFloat(){
 }
 setInterval(spawnFloat,900);for(let i=0;i<10;i++)setTimeout(spawnFloat,i*200);
 
-// NO BUTTON — desktop: physics flee. mobile: teleport random
+// TERSERAH BANG AREN button
+function selectTerserahBangAren(){
+  // deselect semua card
+  document.querySelectorAll('.outfit-card').forEach(c=>c.classList.remove('selected'));
+  selectedOutfit='terserah';
+  // toggle visual pada tombol
+  const btn=document.querySelector('.btn-terserah');
+  btn.classList.add('selected-terserah');
+  btn.textContent='✓ Terserah bang Aren~';
+
+  const box=document.getElementById('feedbackBox');
+  const icon=document.getElementById('feedbackIcon');
+  const text=document.getElementById('feedbackText');
+  icon.textContent='😏';
+  text.textContent='Kamu pake baju pertanian berarti';
+  box.style.display='block';
+
+  document.getElementById('btnNextOutfit').disabled=false;
+}
+
+
+let recType='';
+function openRecModal(type){
+  recType=type;
+  const title=document.getElementById('recModalTitle');
+  const sub=document.getElementById('recModalSub');
+  if(type==='activity'){
+    title.textContent='✍️ Rekomendasiin kegiatan~';
+    sub.textContent='Ada ide kegiatan lain yang seru? tulis aja!';
+  } else {
+    title.textContent='📍 Rekomendasiin tempat~';
+    sub.textContent='Ada tempat lain yang asik? tulis aja!';
+  }
+  document.getElementById('recInput').value='';
+  document.getElementById('recSentMsg').style.display='none';
+  document.getElementById('recModalBtns').style.display='flex';
+  document.getElementById('recOverlay').classList.add('show');
+}
+function closeRecModalDirect(){
+  document.getElementById('recOverlay').classList.remove('show');
+}
+function closeRecModal(e){
+  if(e.target===document.getElementById('recOverlay')) closeRecModalDirect();
+}
+function submitRec(){
+  const val=document.getElementById('recInput').value.trim();
+  if(!val)return;
+  document.getElementById('recModalBtns').style.display='none';
+  document.getElementById('recSentMsg').style.display='block';
+  // kirim via emailjs kalau mau, atau cukup tampilkan pesan
+  setTimeout(()=>closeRecModalDirect(),2000);
+}
+
+
 const btnNo=document.getElementById('btnNo');
 const btnYes=document.getElementById('btnYes');
 let px=0,py=0,vx=0,vy=0,bw=0,bh=0,cx=-9999,cy=-9999,animId=null,physicsActive=false;
@@ -549,8 +643,8 @@ const outfitLabels={
   'training-cina':'Outfit Training Cina 🐉',
   'jjk':'Outfit JJK ⚡',
   'batik':'Outfit Batik 🌺',
-  'gapake-baju':'Gapake Baju 🙈',
-  'terserah':'Terserah Bang Aren 🙄'
+  'gapake-baju':'Gapake Baju 😳',
+  'terserah':'Baju Teknik 👷'
 };
 
 function showPage(id){
@@ -635,6 +729,9 @@ function selectOutfit(card,type){
   document.querySelectorAll('.outfit-card').forEach(c=>c.classList.remove('selected'));
   card.classList.add('selected');
   selectedOutfit=type;
+  // reset terserah button visual
+  const tb=document.querySelector('.btn-terserah');
+  if(tb){tb.classList.remove('selected-terserah');tb.textContent='🤷 Terserah bang Aren aja~';}
 
   const box=document.getElementById('feedbackBox');
   const icon=document.getElementById('feedbackIcon');
@@ -645,16 +742,16 @@ function selectOutfit(card,type){
     text.textContent='Kamu harus pakai baju maroon berarti~ biar serasi! 🫶';
     box.style.display='block';
   } else if(type==='gapake-baju'){
-    icon.textContent='🙈';
-    text.textContent='. . . . .';
+    icon.textContent='👤';
+    text.textContent='takut 😔';
     box.style.display='block';
   } else if(type==='batik'){
     icon.textContent='🤔';
     text.textContent='hmzz, kamu pakai apa ya kalau aku batik~ 👀';
     box.style.display='block';
   } else if(type==='terserah'){
-    icon.textContent='🥺';
-    text.textContent='maaf ya outfit akuh ga banyak :<';
+    icon.textContent='👷';
+    text.textContent='kenapa gitu :<, kamu benci aku ya, kamu marah ya';
     box.style.display='block';
   } else {
     icon.textContent='🧣';
@@ -776,7 +873,6 @@ window.addEventListener('load',()=>{
     ['outfit-jjk','outfit-jjk.jpg'],
     ['outfit-batik','outfit-batik.jpg'],
     ['outfit-teknik','outfit-teknik.jpg'],
-    ['outfit-terserah','outfit-terserah.jpg'],
   ].forEach(([id,src])=>{
     const pi=new Image();pi.src=GITHUB_RAW+src;
     pi.onload=()=>{
