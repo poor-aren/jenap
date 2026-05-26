@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>hiii, mau bareng aku ntar? 🥺</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800;900&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>
+:root {
+  --pink:#f4a7b9; --pink2:#e8809a; --pink-deep:#c45c78;
+  --mint:#a8d8c2; --mint2:#7cc4a8; --mint-deep:#4fa88a;
+  --peach:#fde8d8; --lavender:#e8d5f5; --yellow:#fff3c4;
+  --cream:#fef9f5; --white:#ffffff; --text:#3d2c35; --muted:#9a7a85;
+  --shadow-pink:rgba(196,92,120,.22); --shadow-mint:rgba(79,168,138,.22);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Quicksand',sans-serif;
+  background:var(--cream);color:var(--text);
+  min-height:100vh;overflow-x:hidden;
+}
+.bg-deco{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.bg-blob{position:absolute;border-radius:50%;filter:blur(60px);opacity:.18;}
+.bg-blob.b1{width:400px;height:400px;background:var(--pink);top:-80px;right:-80px;animation:blobmove 8s ease-in-out infinite alternate}
+.bg-blob.b2{width:350px;height:350px;background:var(--mint);bottom:-60px;left:-60px;animation:blobmove 10s ease-in-out infinite alternate-reverse}
+.bg-blob.b3{width:250px;height:250px;background:var(--lavender);top:40%;left:30%;animation:blobmove 12s ease-in-out infinite alternate}
+@keyframes blobmove{0%{transform:scale(1) translate(0,0)}100%{transform:scale(1.15) translate(20px,-20px)}}
+.bg-dots{position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:radial-gradient(circle,#e8d5f5 1.5px,transparent 1.5px),radial-gradient(circle,#a8d8c2 1.5px,transparent 1.5px);
+  background-size:40px 40px;background-position:0 0,20px 20px;opacity:.18;}
+.floatie{position:fixed;pointer-events:none;z-index:1;animation:floatUp linear infinite;opacity:0}
+@keyframes floatUp{0%{transform:translateY(105vh) rotate(0deg);opacity:0}8%{opacity:.55}88%{opacity:.25}100%{transform:translateY(-8vh) rotate(20deg);opacity:0}}
+.page{display:none;position:relative;z-index:2;min-height:100vh;padding:2rem 1.4rem}
+.page.active{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.3rem;animation:fadeUp .45s ease forwards}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.progress{display:flex;gap:.5rem;align-items:center}
+.dot{width:9px;height:9px;border-radius:50%;background:#e0ccd2;transition:all .3s}
+.dot.active{background:var(--pink-deep);width:28px;border-radius:6px}
+.dot.done{background:var(--mint-deep)}
+.photo-frame{
+  position:relative;width:156px;height:156px;border-radius:999px;
+  border:5px solid var(--white);
+  box-shadow:0 0 0 4px var(--pink),0 12px 32px var(--shadow-pink);
+  overflow:hidden;background:linear-gradient(135deg,var(--lavender),var(--peach));
+  display:flex;align-items:center;justify-content:center;font-size:3.5rem;
+  animation:photoPulse 2.6s ease-in-out infinite;flex-shrink:0;
+}
+.photo-frame img{width:100%;height:100%;object-fit:cover;display:block}
+@keyframes photoPulse{
+  0%,100%{box-shadow:0 0 0 4px var(--pink),0 12px 32px var(--shadow-pink)}
+  50%{box-shadow:0 0 0 7px var(--pink),0 16px 40px var(--shadow-pink)}}
+.photo-wrap{position:relative;display:flex;align-items:center;justify-content:center}
+.photo-deco{position:absolute;font-size:1.15rem;animation:orbit 4s linear infinite}
+.photo-deco:nth-child(2){animation-delay:-1s}.photo-deco:nth-child(3){animation-delay:-2s}.photo-deco:nth-child(4){animation-delay:-3s}
+@keyframes orbit{0%{transform:rotate(0deg) translate(98px) rotate(0deg)}100%{transform:rotate(360deg) translate(98px) rotate(-360deg)}}
+.main-card{
+  background:var(--white);border:none;border-radius:32px;
+  padding:2rem 2rem 1.8rem;max-width:400px;width:100%;
+  box-shadow:0 8px 40px var(--shadow-pink),0 2px 8px rgba(0,0,0,.06);
+  text-align:center;position:relative;overflow:hidden;}
+.main-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:5px;
+  background:linear-gradient(90deg,var(--pink),var(--lavender),var(--mint),var(--yellow));
+  border-radius:32px 32px 0 0;}
+h1.main-q{font-family:'Baloo 2',sans-serif;font-size:clamp(1.6rem,5vw,2.3rem);color:var(--text);line-height:1.3;font-weight:900;}
+h1.main-q .hi{color:var(--pink-deep)}h1.main-q .lo{color:var(--mint-deep)}
+h2.sec{font-family:'Baloo 2',sans-serif;font-size:clamp(1.3rem,4vw,1.8rem);color:var(--text);text-align:center;font-weight:800;}
+h2.sec span{color:var(--pink-deep)}
+.sub{color:var(--muted);font-size:.9rem;font-weight:600;text-align:center}
+.deco{font-size:1.3rem;letter-spacing:.3rem;animation:bob 1.8s ease-in-out infinite;text-align:center}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.tag{display:inline-block;background:linear-gradient(135deg,var(--mint),var(--mint2));color:var(--white);font-size:.82rem;font-weight:700;letter-spacing:.3px;padding:.4rem 1.2rem;border-radius:50px;box-shadow:0 4px 12px var(--shadow-mint);}
+.btn-yes{
+  background:linear-gradient(135deg,var(--pink-deep),var(--pink2));color:var(--white);border:none;
+  padding:1rem 2.8rem;border-radius:50px;font-family:'Baloo 2',sans-serif;font-size:1.2rem;font-weight:700;
+  cursor:pointer;box-shadow:0 6px 20px var(--shadow-pink);transition:transform .15s,box-shadow .15s;display:block;margin:0 auto;}
+.btn-yes:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 10px 28px var(--shadow-pink)}
+.btn-yes:active{transform:translateY(1px) scale(.98)}
+#btnNo{
+  background:var(--cream);color:var(--muted);border:2px dashed #e0ccd2;
+  padding:.7rem 1.8rem;border-radius:50px;font-family:'Baloo 2',sans-serif;font-size:.98rem;font-weight:600;
+  cursor:default;white-space:nowrap;user-select:none;-webkit-user-select:none;
+  display:block;margin-left:auto;margin-right:auto;}
+#btnNo.flying{position:fixed;z-index:999;pointer-events:auto;margin:0;}
+
+/* ACTIVITY CARDS */
+.activity-grid{display:flex;flex-direction:column;gap:1rem;width:100%;max-width:360px}
+.activity-card{
+  background:var(--white);border:2.5px solid #f0e4e8;border-radius:22px;
+  padding:1.1rem 1.4rem;cursor:pointer;transition:all .2s;
+  display:flex;align-items:center;gap:1rem;
+  box-shadow:0 4px 14px rgba(244,167,185,.1);}
+.activity-card:hover{border-color:var(--mint);transform:translateY(-3px);box-shadow:0 8px 22px var(--shadow-mint)}
+.activity-card.selected{border-color:var(--pink-deep);background:linear-gradient(135deg,#fff0f4,#fff8fb);box-shadow:0 8px 22px var(--shadow-pink);transform:translateY(-3px);}
+.activity-icon{font-size:2.2rem;flex-shrink:0}
+.activity-info{flex:1;text-align:left}
+.activity-name{font-family:'Baloo 2',sans-serif;font-weight:800;font-size:1.1rem;color:var(--text)}
+.activity-desc{font-size:.8rem;color:var(--muted);font-weight:600}
+.activity-check{font-size:1.3rem;opacity:0;transition:opacity .2s}
+.activity-card.selected .activity-check{opacity:1}
+
+/* PLACES */
+.places-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.85rem;width:100%;max-width:480px}
+@media(max-width:440px){.places-grid{grid-template-columns:repeat(2,1fr)}}
+.place-card{
+  background:var(--white);border:2.5px solid #f0e4e8;border-radius:20px;padding:.9rem .5rem .8rem;
+  cursor:pointer;transition:all .2s;text-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:.45rem;
+  box-shadow:0 4px 14px rgba(244,167,185,.12);}
+.place-card:hover{border-color:var(--mint);transform:translateY(-4px);box-shadow:0 8px 22px var(--shadow-mint)}
+.place-card.selected{border-color:var(--pink-deep);background:linear-gradient(135deg,#fff0f4,#fff8fb);box-shadow:0 8px 22px var(--shadow-pink);transform:translateY(-4px);}
+.place-img-ph{width:72px;height:72px;border-radius:16px;background:linear-gradient(135deg,var(--peach),var(--lavender));display:flex;align-items:center;justify-content:center;font-size:1.9rem;}
+.place-img{width:72px;height:72px;border-radius:16px;object-fit:cover;border:2px solid #f0e4e8}
+.place-name{font-weight:700;font-size:.82rem;color:var(--text)}
+.cbadge{display:none;font-size:.95rem;animation:popIn .3s ease}
+.place-card.selected .cbadge{display:block}
+
+/* DATE/TIME */
+.dt-box{
+  background:var(--white);border:none;border-radius:24px;padding:1.8rem;width:100%;max-width:360px;
+  display:flex;flex-direction:column;gap:1.2rem;box-shadow:0 8px 32px var(--shadow-mint);}
+.fg{display:flex;flex-direction:column;gap:.4rem}
+label{font-weight:700;font-size:.88rem;color:var(--mint-deep)}
+input[type=date],input[type=time]{
+  width:100%;padding:.75rem 1rem;border:2px solid #e0f0ea;border-radius:14px;
+  font-family:'Quicksand',sans-serif;font-size:1rem;font-weight:600;
+  color:var(--text);background:var(--cream);outline:none;transition:border-color .2s,box-shadow .2s;cursor:pointer;}
+input:focus{border-color:var(--mint-deep);box-shadow:0 0 0 3px rgba(79,168,138,.15)}
+
+/* OUTFIT */
+.outfit-grid{display:grid;grid-template-columns:1fr 1fr;gap:.85rem;width:100%;max-width:380px}
+.outfit-card{
+  background:var(--white);border:2.5px solid #f0e4e8;border-radius:20px;padding:1rem .7rem;
+  cursor:pointer;transition:all .2s;text-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:.4rem;
+  box-shadow:0 4px 14px rgba(244,167,185,.1);}
+.outfit-card:hover{border-color:var(--pink);transform:translateY(-4px);box-shadow:0 8px 22px var(--shadow-pink)}
+.outfit-card.selected{border-color:var(--pink-deep);background:linear-gradient(135deg,#fff0f4,#fff8fb);box-shadow:0 8px 22px var(--shadow-pink);transform:translateY(-4px);}
+.outfit-icon{font-size:2rem}
+.outfit-label{font-weight:700;font-size:.8rem;color:var(--text);line-height:1.3}
+.outfit-cbadge{display:none;font-size:.9rem;animation:popIn .3s ease}
+.outfit-card.selected .outfit-cbadge{display:block}
+
+/* FEEDBACK BOX */
+.feedback-box{
+  background:linear-gradient(135deg,#fff0f4,#fffbf0);
+  border:2.5px solid var(--pink);border-radius:22px;
+  padding:1.2rem 1.5rem;max-width:360px;width:100%;
+  text-align:center;box-shadow:0 6px 24px var(--shadow-pink);
+  animation:popIn .4s cubic-bezier(.175,.885,.32,1.275);}
+.feedback-icon{font-size:2.5rem;margin-bottom:.4rem}
+.feedback-text{font-weight:700;font-size:.95rem;color:var(--pink-deep);line-height:1.5}
+
+/* PESAN */
+.pesan-box{
+  background:var(--white);border:none;border-radius:24px;padding:1.5rem;width:100%;max-width:360px;
+  box-shadow:0 8px 32px var(--shadow-mint);display:flex;flex-direction:column;gap:.8rem;}
+textarea{
+  width:100%;padding:.85rem 1rem;border:2px solid #e0f0ea;border-radius:14px;
+  font-family:'Quicksand',sans-serif;font-size:.95rem;font-weight:600;color:var(--text);
+  background:var(--cream);outline:none;resize:none;line-height:1.5;
+  transition:border-color .2s,box-shadow .2s;}
+textarea:focus{border-color:var(--pink-deep);box-shadow:0 0 0 3px var(--shadow-pink)}
+textarea::placeholder{color:#c9aab5}
+
+.btn-next{
+  background:linear-gradient(135deg,var(--mint-deep),var(--mint2));color:var(--white);border:none;
+  padding:.88rem 2.5rem;border-radius:50px;font-family:'Baloo 2',sans-serif;font-size:1.1rem;font-weight:700;
+  cursor:pointer;box-shadow:0 6px 20px var(--shadow-mint);transition:transform .15s,box-shadow .15s;}
+.btn-next:hover{transform:translateY(-3px);box-shadow:0 10px 26px var(--shadow-mint)}
+.btn-next:active{transform:translateY(1px)}
+.btn-next:disabled{opacity:.35;cursor:not-allowed;transform:none}
+.errmsg{color:var(--pink-deep);font-size:.85rem;font-weight:700;display:none;text-align:center}
+
+/* SUCCESS */
+.success-ico{font-size:5rem;animation:popIn .55s cubic-bezier(.175,.885,.32,1.275)}
+@keyframes popIn{from{transform:scale(0) rotate(-15deg)}to{transform:scale(1) rotate(0)}}
+.success-title{font-family:'Baloo 2',sans-serif;font-size:clamp(1.4rem,4vw,2rem);color:var(--pink-deep);text-align:center;font-weight:800}
+.sum-box{background:var(--white);border:none;border-radius:24px;padding:1.4rem 1.8rem;max-width:360px;width:100%;box-shadow:0 8px 32px var(--shadow-mint);}
+.sum-row{display:flex;gap:.7rem;align-items:flex-start;padding:.5rem 0;font-weight:600;font-size:.9rem;border-bottom:1.5px solid #f0f5f3}
+.sum-row:last-child{border-bottom:none}
+.sum-lbl{color:var(--muted);min-width:80px;font-size:.83rem;padding-top:.05rem;flex-shrink:0}
+.sum-val{color:var(--text);font-weight:800;line-height:1.4}
+
+.sending-overlay{
+  position:fixed;inset:0;z-index:100;background:rgba(254,249,245,.92);backdrop-filter:blur(6px);
+  display:none;flex-direction:column;align-items:center;justify-content:center;gap:1rem;}
+.sending-overlay.show{display:flex}
+.send-spin{font-size:3rem;animation:spin 1.2s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.send-txt{font-family:'Baloo 2',sans-serif;font-size:1.1rem;color:var(--pink-deep);font-weight:700}
+.confetti-piece{position:fixed;pointer-events:none;z-index:200;width:10px;height:10px;border-radius:2px;opacity:0;animation:confettiFall linear forwards;}
+@keyframes confettiFall{0%{opacity:1;transform:translateY(-20px) rotate(0deg)}100%{opacity:0;transform:translateY(100vh) rotate(720deg)}}
+.corner{position:fixed;font-size:1.5rem;opacity:.22;pointer-events:none;z-index:0;line-height:1}
+.corner.tl{top:10px;left:12px}.corner.tr{top:10px;right:12px}
+.corner.bl{bottom:10px;left:12px}.corner.br{bottom:10px;right:12px}
+.skip-link{color:var(--muted);font-size:.82rem;font-weight:600;cursor:pointer;text-decoration:underline;margin-top:-.3rem}
+.skip-link:hover{color:var(--pink-deep)}
+</style>
+</head>
+<body>
+
+<div class="bg-deco" aria-hidden="true">
+  <div class="bg-blob b1"></div><div class="bg-blob b2"></div><div class="bg-blob b3"></div>
+</div>
+<div class="bg-dots" aria-hidden="true"></div>
+<div class="corner tl">🌸✨</div><div class="corner tr">✨🌸</div>
+<div class="corner bl">💗🍃</div><div class="corner br">🍃💗</div>
+<div id="floatContainer" aria-hidden="true"></div>
+
+<div class="sending-overlay" id="sendingOverlay">
+  <div class="send-spin">💌</div>
+  <div class="send-txt">Lagi ngirim pesan... ✨</div>
+</div>
+
+<!-- PAGE 1 — INTRO -->
+<div class="page active" id="page1">
+  <div class="progress">
+    <div class="dot active"></div><div class="dot"></div><div class="dot"></div>
+    <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+  </div>
+  <div class="photo-wrap">
+    <div class="photo-deco">🌸</div><div class="photo-deco">💚</div>
+    <div class="photo-deco">⭐</div><div class="photo-deco">🌿</div>
+    <div class="photo-frame" id="profilePic">🌿</div>
+  </div>
+  <div class="deco">🌸 💗 🌿 💗 🌸</div>
+  <div class="main-card">
+    <h1 class="main-q">
+      <span class="hi">hiii,</span> mau bareng<br>
+      <span class="lo">aku</span> ga <span class="hi">ntar</span>? 🥺
+    </h1>
+    <p class="sub" style="margin:.8rem 0 1.5rem">pilih dengan hati yang jujur ya~</p>
+    <button class="btn-yes" id="btnYes" onclick="goToPage2()">💗 Mauuu banget!</button>
+    <button id="btnNo" style="margin-top:1rem">Engga deh 🙄</button>
+  </div>
+  <div class="tag">📍 Banda Aceh ✨</div>
+</div>
+
+<!-- PAGE 2 — PILIH KEGIATAN -->
+<div class="page" id="page2">
+  <div class="progress">
+    <div class="dot done"></div><div class="dot active"></div><div class="dot"></div>
+    <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+  </div>
+  <h2 class="sec">Mau <span>ngapain</span> bareng? 🌟</h2>
+  <p class="sub">pilih satu ya~</p>
+  <div class="activity-grid">
+    <div class="activity-card" onclick="selectActivity(this,'menggambar')">
+      <div class="activity-icon">🎨</div>
+      <div class="activity-info">
+        <div class="activity-name">Menggambar</div>
+        <div class="activity-desc">sesi gambar bareng yang cozy ✏️</div>
+      </div>
+      <div class="activity-check">💗</div>
+    </div>
+    <div class="activity-card" onclick="selectActivity(this,'jalan-jalan')">
+      <div class="activity-icon">🚶‍♀️</div>
+      <div class="activity-info">
+        <div class="activity-name">Jalan-jalan</div>
+        <div class="activity-desc">explore bareng kemana aja~ 🌿</div>
+      </div>
+      <div class="activity-check">💗</div>
+    </div>
+    <div class="activity-card" onclick="selectActivity(this,'nongki')">
+      <div class="activity-icon">☕</div>
+      <div class="activity-info">
+        <div class="activity-name">Nongki Ajah</div>
+        <div class="activity-desc">santai, ngobrol, ngeteh/ngopi ✨</div>
+      </div>
+      <div class="activity-check">💗</div>
+    </div>
+  </div>
+  <button class="btn-next" id="btnNextActivity" onclick="goToPlaceOrTime()" disabled>Lanjut ✨</button>
+</div>
+
+<!-- PAGE 3 — PILIH TEMPAT (hanya untuk menggambar & nongki) -->
+<div class="page" id="page3">
+  <div class="progress">
+    <div class="dot done"></div><div class="dot done"></div><div class="dot active"></div>
+    <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+  </div>
+  <h2 class="sec">Mau <span>di mana</span> nih? ☕</h2>
+  <p class="sub">pilih tempatnya ya~</p>
+  <div class="places-grid" id="placesGrid">
+    <!-- Filled by JS -->
+  </div>
+  <button class="btn-next" id="btnNextPlace" onclick="goToPage4()" disabled>Lanjut ✨</button>
+</div>
+
+<!-- PAGE 4 — WAKTU -->
+<div class="page" id="page4">
+  <div class="progress">
+    <div class="dot done"></div><div class="dot done"></div><div class="dot done"></div>
+    <div class="dot active"></div><div class="dot"></div><div class="dot"></div>
+  </div>
+  <h2 class="sec">Kapan <span>enaknya</span>? 🗓️</h2>
+  <p class="sub">pilih tanggal dan jamnya~</p>
+  <div class="dt-box">
+    <div class="fg"><label>📅 Tanggal</label><input type="date" id="dateInput"></div>
+    <div class="fg"><label>⏰ Jam</label><input type="time" id="timeInput"></div>
+  </div>
+  <p class="errmsg" id="dtError">Isi dulu tanggal dan jamnya ya 🥺</p>
+  <button class="btn-next" id="btnNextTime" onclick="goToPage5()" disabled>Lanjut ✨</button>
+</div>
+
+<!-- PAGE 5 — PILIH OUTFIT -->
+<div class="page" id="page5">
+  <div class="progress">
+    <div class="dot done"></div><div class="dot done"></div><div class="dot done"></div>
+    <div class="dot done"></div><div class="dot active"></div><div class="dot"></div>
+  </div>
+  <h2 class="sec">Kamu mau aku pakai <span>outfit</span> apa? 👗</h2>
+  <p class="sub">pilih outfit aku ya~</p>
+  <div class="outfit-grid">
+    <div class="outfit-card" onclick="selectOutfit(this,'kaos-ijo-starboy')">
+      <div class="outfit-img-ph" id="outfit-starboy">👕</div>
+      <div class="outfit-label">Kaos Ijo Starboy</div>
+      <div class="outfit-cbadge">✓</div>
+    </div>
+    <div class="outfit-card" onclick="selectOutfit(this,'training-cina')">
+      <div class="outfit-img-ph" id="outfit-cina">🥋</div>
+      <div class="outfit-label">Training Cina</div>
+      <div class="outfit-cbadge">✓</div>
+    </div>
+    <div class="outfit-card" onclick="selectOutfit(this,'jjk')">
+      <div class="outfit-img-ph" id="outfit-jjk">⚔️</div>
+      <div class="outfit-label">Outfit JJK</div>
+      <div class="outfit-cbadge">✓</div>
+    </div>
+    <div class="outfit-card" onclick="selectOutfit(this,'batik')">
+      <div class="outfit-img-ph" id="outfit-batik">🌸</div>
+      <div class="outfit-label">Outfit Batik</div>
+      <div class="outfit-cbadge">✓</div>
+    </div>
+    <div class="outfit-card" onclick="selectOutfit(this,'gapake-baju')">
+      <div class="outfit-img-ph" id="outfit-polos">🙈</div>
+      <div class="outfit-label">Gapake Baju</div>
+      <div class="outfit-cbadge">✓</div>
+    </div>
+    <div class="outfit-card" onclick="selectOutfit(this,'terserah')">
+      <div class="outfit-img-ph" id="outfit-terserah">🤷</div>
+      <div class="outfit-label">Terserah Bang Aren</div>
+      <div class="outfit-cbadge">✓</div>
+    </div>
+  </div>
+
+  <!-- Feedback Box — hidden by default -->
+  <div class="feedback-box" id="feedbackBox" style="display:none">
+    <div class="feedback-icon" id="feedbackIcon">💗</div>
+    <div class="feedback-text" id="feedbackText"></div>
+  </div>
+
+  <button class="btn-next" id="btnNextOutfit" onclick="goToPage6()" disabled>Lanjut ✨</button>
+</div>
+
+<!-- PAGE 6 — TITIP PESAN -->
+<div class="page" id="page6">
+  <div class="progress">
+    <div class="dot done"></div><div class="dot done"></div><div class="dot done"></div>
+    <div class="dot done"></div><div class="dot done"></div><div class="dot active"></div>
+  </div>
+  <h2 class="sec">Ada <span>titipan pesan</span>? 💌</h2>
+  <p class="sub">mau nulis apa kek boleh banget~</p>
+  <div class="pesan-box">
+    <textarea id="pesanInput" rows="4" placeholder="tulis pesan kamu di sini... 💗" maxlength="300"></textarea>
+    <p style="font-size:.78rem;color:var(--muted);font-weight:600;text-align:right"><span id="pesanCount">0</span>/300</p>
+  </div>
+  <p class="skip-link" onclick="skipPesan()">skip, ga ada pesan khusus~</p>
+  <button class="btn-next" id="btnSubmit" onclick="submitForm()">Kirim 💌</button>
+</div>
+
+<!-- PAGE 7 — SUCCESS -->
+<div class="page" id="page7">
+  <div class="success-ico">💌</div>
+  <h2 class="success-title">Yayyy! Nanti ketemu! 🥳</h2>
+  <p class="sub">Detailnya udah terkirim~ makasih udah mau 🥺</p>
+  <div class="sum-box">
+    <div class="sum-row"><span class="sum-lbl">🌟 Kegiatan</span><span class="sum-val" id="sumActivity">—</span></div>
+    <div class="sum-row" id="sumPlaceRow"><span class="sum-lbl">📍 Tempat</span><span class="sum-val" id="sumPlace">—</span></div>
+    <div class="sum-row"><span class="sum-lbl">📅 Tanggal</span><span class="sum-val" id="sumDate">—</span></div>
+    <div class="sum-row"><span class="sum-lbl">⏰ Jam</span><span class="sum-val" id="sumTime">—</span></div>
+    <div class="sum-row"><span class="sum-lbl">👗 Outfit</span><span class="sum-val" id="sumOutfit">—</span></div>
+    <div class="sum-row" id="sumPesanRow" style="display:none"><span class="sum-lbl">💌 Pesan</span><span class="sum-val" id="sumPesan">—</span></div>
+  </div>
+  <div class="tag" style="background:linear-gradient(135deg,var(--pink-deep),var(--pink2));box-shadow:0 6px 20px var(--shadow-pink)">💗 Sampai jumpa yaa~ 🌿</div>
+  <div class="deco">🌸 🌿 🌸</div>
+</div>
+
+<script>
+emailjs.init('MGddCwBJ2dhlwtPAd');
+// FLOATING EMOJIS
+const floatEmojis=['💗','🌸','🌿','⭐','✨','🍃','🫶','🌷'];
+const fc=document.getElementById('floatContainer');
+function spawnFloat(){
+  const el=document.createElement('div');el.className='floatie';
+  el.textContent=floatEmojis[Math.floor(Math.random()*floatEmojis.length)];
+  el.style.left=Math.random()*96+'vw';el.style.fontSize=(.65+Math.random()*1)+'rem';
+  const d=7+Math.random()*8;el.style.animationDuration=d+'s';el.style.animationDelay=(Math.random()*2)+'s';
+  fc.appendChild(el);setTimeout(()=>el.remove(),(d+3)*1000);
+}
+setInterval(spawnFloat,900);for(let i=0;i<10;i++)setTimeout(spawnFloat,i*200);
+
+// NO BUTTON — desktop: physics flee. mobile: teleport random
+const btnNo=document.getElementById('btnNo');
+const btnYes=document.getElementById('btnYes');
+let px=0,py=0,vx=0,vy=0,bw=0,bh=0,cx=-9999,cy=-9999,animId=null,physicsActive=false;
+const FLEE_R=170,FLEE_F=24,BOUNCE=.78,FRIC=.96,MAXSPD=24,MIN_SPD=.9;
+const isMobile=()=>('ontouchstart' in window||navigator.maxTouchPoints>0);
+
+function teleportRandom(){
+  if(!onPage1())return;
+  const W=window.innerWidth,H=window.innerHeight;
+  const bW=btnNo.offsetWidth,bH=btnNo.offsetHeight;
+  if(!btnNo.classList.contains('flying')){
+    const r=btnNo.getBoundingClientRect();
+    btnNo.classList.add('flying');
+    btnNo.style.left=r.left+'px';
+    btnNo.style.top=r.top+'px';
+    btnNo.style.margin='0';
+    btnNo.style.transition='none';
+    void btnNo.offsetWidth;
+  }
+  const curL=parseFloat(btnNo.style.left)||0;
+  const curT=parseFloat(btnNo.style.top)||0;
+  let nx,ny,att=0;
+  do{
+    nx=12+Math.random()*(W-bW-24);
+    ny=12+Math.random()*(H-bH-24);
+    att++;
+  }while(att<30&&Math.sqrt((nx-curL)**2+(ny-curT)**2)<80);
+
+  // Fase 1: kecil + pudar = kesan "kabur/ilang"
+  btnNo.style.transition='transform .18s ease-in, opacity .18s ease-in';
+  btnNo.style.transform='scale(0) rotate(20deg)';
+  btnNo.style.opacity='0';
+
+  setTimeout(()=>{
+    // Fase 2: pindah posisi (ga keliatan karena opacity 0)
+    btnNo.style.transition='none';
+    btnNo.style.left=nx+'px';
+    btnNo.style.top=ny+'px';
+    btnNo.style.transform='scale(0) rotate(-20deg)';
+    void btnNo.offsetWidth;
+
+    // Fase 3: muncul lagi di tempat baru — nembak keluar
+    btnNo.style.transition='transform .3s cubic-bezier(.175,.885,.32,1.275), opacity .2s ease-out';
+    btnNo.style.transform='scale(1) rotate(0deg)';
+    btnNo.style.opacity='1';
+  }, 200);
+}
+
+function wakeUp(){
+  if(physicsActive)return;
+  const r=btnNo.getBoundingClientRect();
+  bw=r.width;bh=r.height;px=r.left;py=r.top;
+  btnNo.classList.add('flying');
+  btnNo.style.left=px+'px';btnNo.style.top=py+'px';btnNo.style.margin='0';
+  physicsActive=true;
+  const bcx=px+bw/2,bcy=py+bh/2;
+  const dx=bcx-cx,dy=bcy-cy,d=Math.sqrt(dx*dx+dy*dy)||1;
+  vx=(dx/d)*7;vy=(dy/d)*7;
+  if(!animId)animId=requestAnimationFrame(loop);
+}
+function clamp(){const s=Math.sqrt(vx*vx+vy*vy);if(s>MAXSPD){vx=vx/s*MAXSPD;vy=vy/s*MAXSPD;}}
+function loop(){
+  const W=window.innerWidth,H=window.innerHeight;
+  const bcx=px+bw/2,bcy=py+bh/2;
+  const dx=bcx-cx,dy=bcy-cy,dist=Math.sqrt(dx*dx+dy*dy)||1;
+  if(dist<FLEE_R){const str=FLEE_F*Math.pow((FLEE_R-dist)/FLEE_R,1.5)*3;vx+=(dx/dist)*str;vy+=(dy/dist)*str;}
+  const yr=btnYes.getBoundingClientRect();
+  const yecx=yr.left+yr.width/2,yecy=yr.top+yr.height/2;
+  const gap=Math.max(yr.width,yr.height)/2+Math.max(bw,bh)/2+30;
+  const ex=bcx-yecx,ey=bcy-yecy,ed=Math.sqrt(ex*ex+ey*ey)||1;
+  if(ed<gap){const push=(gap-ed)*1.5;vx+=(ex/ed)*push;vy+=(ey/ed)*push;}
+  vx*=FRIC;vy*=FRIC;
+  const spd=Math.sqrt(vx*vx+vy*vy);
+  if(spd>0&&spd<MIN_SPD){vx=vx/spd*MIN_SPD;vy=vy/spd*MIN_SPD;}
+  clamp();px+=vx;py+=vy;
+  if(px<8){px=8;vx=Math.abs(vx)*BOUNCE;}
+  if(px>W-bw-8){px=W-bw-8;vx=-Math.abs(vx)*BOUNCE;}
+  if(py<8){py=8;vy=Math.abs(vy)*BOUNCE;}
+  if(py>H-bh-8){py=H-bh-8;vy=-Math.abs(vy)*BOUNCE;}
+  btnNo.style.left=px+'px';btnNo.style.top=py+'px';
+  animId=requestAnimationFrame(loop);
+}
+function onPage1(){return document.getElementById('page1').classList.contains('active');}
+
+// Desktop: mouse flee physics
+document.addEventListener('mousemove',e=>{
+  if(isMobile())return;
+  cx=e.clientX;cy=e.clientY;
+  if(!onPage1())return;
+  if(!physicsActive){
+    const r=btnNo.getBoundingClientRect();
+    const bcx=r.left+r.width/2,bcy=r.top+r.height/2;
+    if(Math.sqrt((cx-bcx)**2+(cy-bcy)**2)<FLEE_R)wakeUp();
+  }
+});
+
+// Mobile: touchstart = teleport. Desktop: click = wakeUp physics
+btnNo.addEventListener('touchstart',e=>{
+  e.preventDefault();
+  e.stopPropagation();
+  teleportRandom();
+},{passive:false});
+btnNo.addEventListener('touchend',e=>{
+  e.preventDefault();
+  e.stopPropagation();
+},{passive:false});
+btnNo.addEventListener('click',e=>{
+  e.preventDefault();
+  e.stopPropagation();
+  if(isMobile())return; // sudah dihandle touchstart
+  if(onPage1()&&!physicsActive)wakeUp();
+});
+
+// STATE
+let selectedActivity=null,selectedPlace=null,selectedOutfit=null;
+
+// GitHub raw base URL
+const GITHUB_RAW='https://raw.githubusercontent.com/poor-aren/ntukjenap/main/';
+
+// Places data
+const placeOptions={
+  menggambar:[
+    {id:'kantin-hana',emoji:'🍽️',name:'Kantin Hana',img:'place-kantin-hana.jpg'},
+    {id:'erzed',emoji:'☕',name:'Erzed',img:'place-erzed.jpg'},
+    {id:'cot-iri',emoji:'🌿',name:'Cot Iri',img:'place-cot-iri.jpg'},
+    {id:'univ-kopi',emoji:'☕',name:'Univ Kopi',img:'place-univ-kopi.jpg'},
+    {id:'atariki',emoji:'🍰',name:'Atariki',img:'place-atariki.jpg'},
+    {id:'perpus',emoji:'📚',name:'Perpus',img:'place-perpus.jpg'},
+  ],
+  nongki:[
+    {id:'kantin-hana',emoji:'🍽️',name:'Kantin Hana',img:'place-kantin-hana.jpg'},
+    {id:'erzed',emoji:'☕',name:'Erzed',img:'place-erzed.jpg'},
+    {id:'cot-iri',emoji:'🌿',name:'Cot Iri',img:'place-cot-iri.jpg'},
+    {id:'univ-kopi',emoji:'☕',name:'Univ Kopi',img:'place-univ-kopi.jpg'},
+    {id:'atariki',emoji:'🍰',name:'Atariki',img:'place-atariki.jpg'},
+    {id:'perpus',emoji:'📚',name:'Perpus',img:'place-perpus.jpg'},
+  ]
+};
+
+const activityLabels={
+  'menggambar':'Menggambar 🎨',
+  'jalan-jalan':'Jalan-jalan 🚶‍♀️',
+  'nongki':'Nongki Ajah ☕'
+};
+
+const outfitLabels={
+  'kaos-ijo-starboy':'Kaos Ijo Starboy 🟢',
+  'training-cina':'Outfit Training Cina 🐉',
+  'jjk':'Outfit JJK ⚡',
+  'batik':'Outfit Batik 🌺',
+  'gapake-baju':'Gapake Baju 🙈',
+  'terserah':'Terserah Bang Aren 🙄'
+};
+
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+  btnNo.style.display=(id==='page1')?'block':'none';
+}
+
+function goToPage2(){showPage('page2');}
+
+function selectActivity(card,activity){
+  document.querySelectorAll('.activity-card').forEach(c=>c.classList.remove('selected'));
+  card.classList.add('selected');
+  selectedActivity=activity;
+  document.getElementById('btnNextActivity').disabled=false;
+}
+
+function goToPlaceOrTime(){
+  if(!selectedActivity)return;
+  selectedPlace=null;
+  if(selectedActivity==='jalan-jalan'){
+    showPage('page4'); // langsung ke waktu
+  } else {
+    // build place cards
+    const grid=document.getElementById('placesGrid');
+    grid.innerHTML='';
+    const places=placeOptions[selectedActivity]||[];
+    places.forEach(p=>{
+      const div=document.createElement('div');
+      div.className='place-card';
+      div.onclick=function(){selectPlace(this,p.name);};
+      // coba load gambar dari GitHub, fallback ke emoji
+      const imgUrl=GITHUB_RAW+p.img;
+      div.innerHTML=`
+        <div class="place-img-ph" id="img-${p.id}">${p.emoji}</div>
+        <div class="place-name">${p.name}</div>
+        <div class="cbadge">💗</div>`;
+      grid.appendChild(div);
+      // load gambar async, ganti placeholder kalau berhasil
+      const imgEl=new Image();
+      imgEl.onload=()=>{
+        const ph=div.querySelector('.place-img-ph');
+        if(ph){
+          const im=document.createElement('img');
+          im.src=imgUrl;im.className='place-img';
+          ph.replaceWith(im);
+        }
+      };
+      imgEl.src=imgUrl;
+    });
+    document.getElementById('btnNextPlace').disabled=true;
+    showPage('page3');
+  }
+}
+
+function selectPlace(card,name){
+  document.querySelectorAll('.place-card').forEach(c=>c.classList.remove('selected'));
+  card.classList.add('selected');selectedPlace=name;
+  document.getElementById('btnNextPlace').disabled=false;
+}
+function goToPage4(){if(selectedPlace||selectedActivity==='jalan-jalan')showPage('page4');}
+
+// DATE/TIME
+document.getElementById('dateInput').addEventListener('change',checkTime);
+document.getElementById('timeInput').addEventListener('change',checkTime);
+function checkTime(){
+  const d=document.getElementById('dateInput').value;
+  const t=document.getElementById('timeInput').value;
+  document.getElementById('btnNextTime').disabled=!(d&&t);
+}
+function goToPage5(){
+  const d=document.getElementById('dateInput').value;
+  const t=document.getElementById('timeInput').value;
+  if(!d||!t){document.getElementById('dtError').style.display='block';return;}
+  document.getElementById('dtError').style.display='none';
+  showPage('page5');
+}
+
+// OUTFIT
+function selectOutfit(card,type){
+  document.querySelectorAll('.outfit-card').forEach(c=>c.classList.remove('selected'));
+  card.classList.add('selected');
+  selectedOutfit=type;
+
+  const box=document.getElementById('feedbackBox');
+  const icon=document.getElementById('feedbackIcon');
+  const text=document.getElementById('feedbackText');
+
+  if(type==='kaos-ijo-starboy'||type==='training-cina'){
+    icon.textContent='👗';
+    text.textContent='Kamu harus pakai baju maroon berarti~ biar serasi! 🫶';
+    box.style.display='block';
+  } else if(type==='gapake-baju'){
+    icon.textContent='🙈';
+    text.textContent='. . . . .';
+    box.style.display='block';
+  } else if(type==='batik'){
+    icon.textContent='🤔';
+    text.textContent='hmzz, kamu pakai apa ya kalau aku batik~ 👀';
+    box.style.display='block';
+  } else if(type==='terserah'){
+    icon.textContent='🥺';
+    text.textContent='maaf ya outfit akuh ga banyak :<';
+    box.style.display='block';
+  } else {
+    icon.textContent='🧣';
+    text.textContent='Pakeee pashmina jahat sama jepti rambut nya plissss 🥺✨';
+    box.style.display='block';
+  }
+
+  document.getElementById('btnNextOutfit').disabled=false;
+}
+function goToPage6(){if(selectedOutfit)showPage('page6');}
+
+// PESAN
+document.getElementById('pesanInput').addEventListener('input',function(){
+  document.getElementById('pesanCount').textContent=this.value.length;
+});
+function skipPesan(){
+  document.getElementById('pesanInput').value='';
+  submitForm();
+}
+
+// CONFETTI
+function launchConfetti(){
+  const colors=['#f4a7b9','#a8d8c2','#e8d5f5','#fff3c4','#7cc4a8'];
+  for(let i=0;i<55;i++){
+    const el=document.createElement('div');el.className='confetti-piece';
+    el.style.left=Math.random()*100+'vw';
+    el.style.background=colors[Math.floor(Math.random()*colors.length)];
+    el.style.width=(6+Math.random()*8)+'px';el.style.height=(6+Math.random()*8)+'px';
+    el.style.borderRadius=Math.random()>.5?'50%':'2px';
+    el.style.animationDuration=(1.5+Math.random()*2)+'s';
+    el.style.animationDelay=(Math.random()*.8)+'s';
+    document.body.appendChild(el);setTimeout(()=>el.remove(),4000);
+  }
+}
+
+function submitForm(){
+  const date=document.getElementById('dateInput').value;
+  const time=document.getElementById('timeInput').value;
+  const pesan=document.getElementById('pesanInput').value.trim();
+
+  const d=new Date(date);
+  const ds=d.toLocaleDateString('id-ID',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+
+  // Isi summary
+  document.getElementById('sumActivity').textContent=activityLabels[selectedActivity]||selectedActivity;
+  if(selectedActivity==='jalan-jalan'){
+    document.getElementById('sumPlaceRow').style.display='none';
+  } else {
+    document.getElementById('sumPlaceRow').style.display='flex';
+    document.getElementById('sumPlace').textContent=selectedPlace||'—';
+  }
+  document.getElementById('sumDate').textContent=ds;
+  document.getElementById('sumTime').textContent=time+' WIB';
+  document.getElementById('sumOutfit').textContent=outfitLabels[selectedOutfit]||selectedOutfit;
+
+  if(pesan){
+    document.getElementById('sumPesanRow').style.display='flex';
+    document.getElementById('sumPesan').textContent=pesan;
+  } else {
+    document.getElementById('sumPesanRow').style.display='none';
+  }
+
+  // Kirim via EmailJS
+  const placeInfo=selectedActivity==='jalan-jalan'?'Jalan-jalan (bebas~)':(selectedPlace||'-');
+  const lines=[
+    'Kegiatan : '+(activityLabels[selectedActivity]||selectedActivity),
+    'Tempat   : '+placeInfo,
+    'Tanggal  : '+ds,
+    'Jam      : '+time+' WIB',
+    'Outfit   : '+(outfitLabels[selectedOutfit]||selectedOutfit),
+  ];
+  if(pesan) lines.push('Pesan    : '+pesan);
+  lines.push('','Ditunggu yaa~');
+  const templateParams={
+    message: lines.join('\n'),
+    kegiatan: activityLabels[selectedActivity]||selectedActivity,
+    tempat: placeInfo,
+    tanggal: ds,
+    jam: time+' WIB',
+    outfit: outfitLabels[selectedOutfit]||selectedOutfit,
+    pesan_khusus: pesan||'(tidak ada pesan)',
+  };
+  document.getElementById('sendingOverlay').classList.add('show');
+  emailjs.send('jenap','template_tgqaaa7', templateParams)
+    .then(()=>{
+      document.getElementById('sendingOverlay').classList.remove('show');
+      showPage('page7');launchConfetti();
+    })
+    .catch((err)=>{
+      console.error('EmailJS error:',err);
+      document.getElementById('sendingOverlay').classList.remove('show');
+      showPage('page7');launchConfetti();
+    });
+}
+
+// INIT
+window.addEventListener('load',()=>{
+  physicsActive=false;
+  if(animId){cancelAnimationFrame(animId);animId=null;}
+  document.getElementById('dateInput').min=new Date().toISOString().split('T')[0];
+
+  // Outfit images from GitHub
+  [
+    ['outfit-starboy','outfit-starboy.jpg'],
+    ['outfit-cina','outfit-cina.jpg'],
+    ['outfit-jjk','outfit-jjk.jpg'],
+    ['outfit-batik','outfit-batik.jpg'],
+    ['outfit-polos','outfit-polos.jpg'],
+    ['outfit-terserah','outfit-terserah.jpg'],
+  ].forEach(([id,src])=>{
+    const pi=new Image();pi.src=GITHUB_RAW+src;
+    pi.onload=()=>{
+      const el=document.getElementById(id);if(!el)return;
+      const im=document.createElement('img');im.src=GITHUB_RAW+src;im.className='outfit-img';el.replaceWith(im);
+    };
+  });
+
+  // Profile photo from GitHub
+  const profImg=new Image();profImg.src=GITHUB_RAW+'dia.png';
+  profImg.onload=()=>{
+    const f=document.getElementById('profilePic');f.textContent='';
+    const i=document.createElement('img');i.src=GITHUB_RAW+'dia.png';i.alt='dia';f.appendChild(i);
+  };
+});
+</script>
+</body>
+</html>
